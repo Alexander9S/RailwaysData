@@ -1,0 +1,55 @@
+CREATE TABLE dor (
+	id INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT ck_dor_id CHECK (id > 0)
+);
+
+CREATE TABLE uch (
+	id INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT ck_uch_id CHECK (id > 0)
+);
+
+CREATE TABLE okato (
+	id SERIAL NOT NULL, 
+	name VARCHAR NOT NULL, 
+	PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_okato_name ON okato (name);
+
+CREATE TABLE station (
+	esr INTEGER NOT NULL, 
+	name VARCHAR NOT NULL, 
+	x DOUBLE PRECISION NOT NULL, 
+	y DOUBLE PRECISION NOT NULL, 
+	dor_id INTEGER NOT NULL, 
+	okato_id INTEGER NOT NULL, 
+	PRIMARY KEY (esr), 
+	CONSTRAINT uq_station_x_y UNIQUE (x, y), 
+	FOREIGN KEY(dor_id) REFERENCES dor (id), 
+	FOREIGN KEY(okato_id) REFERENCES okato (id)
+);
+
+CREATE INDEX ix_station_dor_id ON station (dor_id);
+
+CREATE INDEX ix_station_okato_id ON station (okato_id);
+
+CREATE TABLE uch_station (
+	uch_id INTEGER NOT NULL, 
+	num INTEGER NOT NULL, 
+	esr INTEGER NOT NULL, 
+	CONSTRAINT ck_uch_station_num CHECK (num > 0), 
+	CONSTRAINT uq_uch_station_uch_id_num UNIQUE (uch_id, num), 
+	FOREIGN KEY(uch_id) REFERENCES uch (id), 
+	FOREIGN KEY(esr) REFERENCES station (esr)
+);
+
+CREATE INDEX ix_uch_station_uch_id_num ON uch_station (uch_id, num);
+
+CREATE INDEX ix_uch_station_num ON uch_station (num);
+
+CREATE INDEX ix_uch_station_esr ON uch_station (esr);
+
+CREATE INDEX ix_uch_station_uch_id ON uch_station (uch_id);
+
