@@ -21,8 +21,8 @@ CREATE UNIQUE INDEX ix_okato_name ON okato (name);
 CREATE TABLE station (
 	esr INTEGER NOT NULL, 
 	name VARCHAR NOT NULL, 
-	x DOUBLE PRECISION NOT NULL, 
-	y DOUBLE PRECISION NOT NULL, 
+	x DOUBLE PRECISION, 
+	y DOUBLE PRECISION, 
 	dor_id INTEGER NOT NULL, 
 	okato_id INTEGER NOT NULL, 
 	PRIMARY KEY (esr), 
@@ -45,11 +45,11 @@ CREATE TABLE uch_station (
 	FOREIGN KEY(esr) REFERENCES station (esr)
 );
 
-CREATE INDEX ix_uch_station_uch_id_num ON uch_station (uch_id, num);
-
-CREATE INDEX ix_uch_station_num ON uch_station (num);
-
 CREATE INDEX ix_uch_station_esr ON uch_station (esr);
 
 CREATE INDEX ix_uch_station_uch_id ON uch_station (uch_id);
+
+CREATE INDEX ix_uch_station_uch_id_num ON uch_station (uch_id, num);
+
+CREATE INDEX ix_uch_station_num ON uch_station (num);
 

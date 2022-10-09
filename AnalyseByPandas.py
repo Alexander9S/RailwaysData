@@ -104,19 +104,19 @@ sta_st_end_df.to_excel("AnalyseResult/sta_st_end_df.xlsx")
 
 # Полный справочник дорог
 sta_dor_df = pd.DataFrame(np.concatenate((sta_dor_begin_df.values, sta_dor_end_df.values), axis=0))
-sta_dor_df.columns = ["DOR_ID"]
+sta_dor_df.columns = ["ID"]
 sta_dor_df = sta_dor_df.drop_duplicates()
-sta_dor_df.sort_values("DOR_ID", ascending=True, inplace=True)
-assert sta_dor_df["DOR_ID"].is_unique
+sta_dor_df.sort_values("ID", ascending=True, inplace=True)
+assert sta_dor_df["ID"].is_unique
 sta_dor_df.to_excel("AnalyseResult/sta_dor_df.xlsx")
 
 # Полный справочник ОКАТО
 # При импорте в БД дополнительно нужно будет автоматически генерировать суррогатный Primary Key
 sta_okato_df = pd.DataFrame(np.concatenate((sta_okato_begin_df.values, sta_okato_end_df.values), axis=0))
-sta_okato_df.columns = ["OKATO_NAME"]
+sta_okato_df.columns = ["NAME"]
 sta_okato_df = sta_okato_df.drop_duplicates()
-sta_okato_df.sort_values("OKATO_NAME", ascending=True, inplace=True)
-assert sta_okato_df["OKATO_NAME"].is_unique
+sta_okato_df.sort_values("NAME", ascending=True, inplace=True)
+assert sta_okato_df["NAME"].is_unique
 sta_okato_df.to_excel("AnalyseResult/sta_okato_df.xlsx")
 
 # Полный справочник станций без их координат

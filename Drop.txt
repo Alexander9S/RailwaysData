@@ -1,0 +1,18 @@
+-- Для тестирования некоторых повторных запусков
+
+DROP INDEX IF EXISTS ix_uch_station_num;
+DROP INDEX IF EXISTS ix_uch_station_uch_id_num;
+DROP INDEX IF EXISTS ix_uch_station_uch_id;
+DROP INDEX IF EXISTS ix_uch_station_esr;
+DROP TABLE IF EXISTS uch_station;
+
+DROP INDEX IF EXISTS ix_station_okato_id;
+DROP INDEX IF EXISTS ix_station_dor_id;
+DROP TABLE IF EXISTS station;
+
+DROP INDEX IF EXISTS ix_okato_name;
+DROP TABLE IF EXISTS okato;
+
+DROP TABLE IF EXISTS uch;
+
+DROP TABLE IF EXISTS dor;
